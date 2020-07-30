@@ -1,4 +1,4 @@
-export const stringToColor = (text: string, rgb:boolean, min = 0, max = 255) =>  {
+export const stringToColor = (text: string, rgb = false, min = 0, max = 255) =>  {
   const division = Math.floor(text.length / 3)
   const values = limitValues({min, max})(Array.from(text, (letter: string) => {
     return letter.charCodeAt(0)
