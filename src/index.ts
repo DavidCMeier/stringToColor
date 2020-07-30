@@ -1,0 +1,1 @@
+export {stringToColor} from './stringToColor'
