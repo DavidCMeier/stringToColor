@@ -1,12 +1,12 @@
 {
   "name": "@davidcmeier/string-to-color",
-  "version": "0.0.8",
-  "description": "Can log \"hello world\" and \"goodbye world\" to the console!",
+  "version": "0.0.9",
+  "description": "Transform any string to a color!",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "test": "test"
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
