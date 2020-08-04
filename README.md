@@ -1,10 +1,11 @@
 # String To Color
 
-Ohh need you assign a color to your user? This is your solution (sounds music :P)
-Just introduce an String and get the value of the color in Hex (or RGB)
+Oh, do you need to assign a color to your user? This is your solution (music on :P)
+Just introduce a string and get the color value in Hex (or RGB)
+
 ## How to use 🚀
 
-Just install library (or copy the code if you want)
+Just install the library (or copy the code if you want)
 ```
 npm install @DavidCMeier/stringToColor
 ```
@@ -13,32 +14,34 @@ and write the magic words:
 ```
 stringToColor('cool cool cool!')
 ```
-and for this you will get ``#cececf``
+
+and with this you will get ``#cececf``
 
 # That's all?
-No! you can get the value in RGB! 
+No! You can also get the value in RGB! 
+
 ```
 stringToColor('cool cool cool!', true)
 ```
-return ``Object {
+returns ``Object {
            red: 206,
            green: 206,
            blue: 207
          }``
 
-And if you need to limit the numbers (if you don't want a #000000 of #FFFFFF) just do it!
+In case you need to limit the numbers (if you don't want a #000000 of #FFFFFF) just do the following!
 ```
-stringToColor('cool cool cool!', false, 100,150)
+stringToColor('cool cool cool!', false, 100, 150)
 ```
-return ```#6f6f70```
+returns ```#6f6f70```
 
-## Contribuit 🖇️
+## Contribute 🖇️
 
-Feel free to contribuit
+Feel free to contribute
 
 ## License 📄
 
-This project is under MITlicense - look the file [LICENSE.md](LICENSE.md) for more details.
+This project is under MIT License - look at the file [LICENSE.md](LICENSE.md) for more details.
 
 
 
