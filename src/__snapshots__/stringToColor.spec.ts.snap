@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`check limits 1`] = `[Function]`;
+
+exports[`stringToColor in RGB 1`] = `
+Object {
+  "blue": 231,
+  "green": 101,
+  "red": 116,
+}
+`;
+
+exports[`stringToColor in hex 1`] = `"#7465e7"`;
