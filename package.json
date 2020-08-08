@@ -1,12 +1,13 @@
 {
   "name": "@davidcmeier/string-to-color",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "Transform any string to a color!",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "prepublish": "npm run build"
+    "test": "jest",
+    "prepublish": "npm run test && npm run build"
   },
   "repository": {
     "type": "git",
@@ -20,5 +21,10 @@
   "license": "MIT",
   "dependencies": {
     "typescript": "^3.9.7"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.9",
+    "jest": "^26.2.2",
+    "ts-jest": "^26.1.4"
   }
 }
