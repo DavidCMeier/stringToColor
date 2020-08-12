@@ -21,7 +21,7 @@ and with this you will get ``#cececf``
 No! You can also get the value in RGB! 
 
 ```
-stringToColor('cool cool cool!', true)
+stringToColor('cool cool cool!', config: {output: 'RGB'})
 ```
 returns ``Object {
            red: 206,
@@ -31,7 +31,12 @@ returns ``Object {
 
 In case you need to limit the numbers (if you don't want a #000000 of #FFFFFF) just do the following!
 ```
-stringToColor('cool cool cool!', false, 100, 150)
+const limits: LimitColor = {
+  blue: { min: 100, max: 150},
+  green: { min: 100, max: 150},
+  red: { min: 100, max: 150},
+}
+stringToColor('cool cool cool!', {limitColor: limits})
 ```
 returns ```#6f6f70```
 

@@ -1,12 +1,12 @@
 import { LimitColor, stringToColor } from "./stringToColor";
 
 test('stringToColor in hex', () => {
-  const basicColorHex = stringToColor('test', false)
+  const basicColorHex = stringToColor('test', {output: 'HEX'})
   expect(basicColorHex).toMatchSnapshot()
 })
 
 test('stringToColor in RGB',() =>{
-  const basicColorRGB = stringToColor('test', true)
+  const basicColorRGB = stringToColor('test', {output: 'RGB'})
   expect(basicColorRGB).toMatchSnapshot()
 })
 
@@ -17,7 +17,7 @@ test('test limits min functions', () => {
     red: { min: -1, max: 255},
   }
   expect(() => {
-    stringToColor('test', false, limits)
+    stringToColor('test', {output: 'HEX', limitColor: limits})
   }).toThrow('The limits must be between 0 and 255 both included')
 })
 
@@ -28,7 +28,7 @@ test( 'limits max function', () => {
     red: { min: 0, max: 255},
   }
   expect(() => {
-    stringToColor('test', false, limits)
+    stringToColor('test', {output: 'HEX', limitColor: limits})
   }).toThrowError('The limits must be between 0 and 255 both included')
 })
 
@@ -39,7 +39,7 @@ test('limits: the minimum cannot be greater than the maximum', () => {
     red: { min: 0, max: 255},
   }
   expect(() => {
-    stringToColor('test', false, limits)
+    stringToColor('test', {output: 'HEX', limitColor: limits})
   }).toThrowError('the minimum cannot be greater than the maximum')
 })
 
@@ -50,6 +50,6 @@ test('check limits', () => {
     red: { min: 0, max: 2},
   }
   expect(() => {
-    stringToColor('test', false, limits)
+    stringToColor('test', {output: 'HEX', limitColor: limits})
   }).toMatchSnapshot()
 })
