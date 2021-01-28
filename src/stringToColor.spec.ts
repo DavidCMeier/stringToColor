@@ -53,3 +53,8 @@ test('check limits', () => {
     stringToColor('test', {output: 'HEX', limitColor: limits})
   }).toMatchSnapshot()
 })
+
+test( 'return black', () => {
+  expect(stringToColor('', {output: 'HEX'})).toBe('#000000')
+})
+

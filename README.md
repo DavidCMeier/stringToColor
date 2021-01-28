@@ -7,7 +7,7 @@ Just introduce a string and get the color value in Hex (or RGB)
 
 Just install the library (or copy the code if you want)
 ```
-npm install @DavidCMeier/string-to-color
+npm install @davidcmeier/string-to-color
 ```
 
 and write the magic words: 

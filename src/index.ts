@@ -1,1 +1,1 @@
-export {stringToColor} from './stringToColor'
+export {stringToColor, rgbToHex, hexToRgb, getContrast} from './stringToColor'

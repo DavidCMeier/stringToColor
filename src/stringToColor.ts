@@ -13,13 +13,13 @@ export interface ColorRGB {
 export type StringToColorHEX = (text: string) => string
 export type StringToColorRGB = (text: string) => ColorRGB
 
-export function stringToColor(output: 'HEX' | {output?: 'HEX', limitColor?: LimitColor}): StringToColorHEX
-export function stringToColor(output: 'RGB' | {output?: 'RGB', limitColor?: LimitColor}): StringToColorRGB
-export function stringToColor(text: string, config?: {output?: 'HEX', limitColor?: LimitColor}): string
-export function stringToColor(text: string, config?: {output?: 'RGB', limitColor?: LimitColor}): ColorRGB
+export function stringToColor(output: 'HEX' | { output?: 'HEX', limitColor?: LimitColor }): StringToColorHEX
+export function stringToColor(output: 'RGB' | { output?: 'RGB', limitColor?: LimitColor }): StringToColorRGB
+export function stringToColor(text: string, config?: { output?: 'HEX', limitColor?: LimitColor }): string
+export function stringToColor(text: string, config?: { output?: 'RGB', limitColor?: LimitColor }): ColorRGB
 export function stringToColor(
-  textOrOutputOrConfig: string | 'HEX' | 'RGB' | {output?: 'HEX' | 'RGB', limitColor?: LimitColor},
-  config: {output?: 'HEX' | 'RGB', limitColor?: LimitColor} = {output: 'HEX'}
+  textOrOutputOrConfig: string | 'HEX' | 'RGB' | { output?: 'HEX' | 'RGB', limitColor?: LimitColor },
+  config: { output?: 'HEX' | 'RGB', limitColor?: LimitColor } = {output: 'HEX'}
 ): string | ColorRGB | StringToColorHEX | StringToColorRGB {
   if (['HEX', 'RGB'].includes(textOrOutputOrConfig as string) || typeof textOrOutputOrConfig !== 'string') {
     return stringToColorConfigured(textOrOutputOrConfig as any)
@@ -29,17 +29,17 @@ export function stringToColor(
 }
 
 function stringToColorConfigured(
-  outputOrConfig: 'HEX' | 'RGB' | {output?: 'HEX' | 'RGB', limitColor?: LimitColor}
+  outputOrConfig: 'HEX' | 'RGB' | { output?: 'HEX' | 'RGB', limitColor?: LimitColor }
 ): StringToColorHEX | StringToColorRGB {
   const config = typeof outputOrConfig === 'string'
-    ? { output: outputOrConfig }
+    ? {output: outputOrConfig}
     : outputOrConfig
 
   return ((text: string): string | ColorRGB => {
     const output = config?.output || 'HEX'
     const division = Math.floor(text.length / 3)
     const colors = Array
-      .from(text, (letter: string) => letter.charCodeAt(0))
+      .from(text, (letter: string) => unescape(encodeURIComponent(letter)).charCodeAt(0))
       .reduce((acc, curr, index) => {
         return index < division
           ? {...acc, red: acc.red + curr}
@@ -65,8 +65,30 @@ const linearConversion = ({min, max}) => (n) => {
   return (((n - min) % (max - min)) + (max - min)) % (max - min) + min
 }
 
-const rgbToHex = ({red, green, blue}) => {
+export function rgbToHex({red, green, blue}): string {
   return '#' + ((1 << 24) + (red << 16) + (green << 8) + blue).toString(16).slice(1)
+}
+
+export function hexToRgb(colorHex: string): ColorRGB {
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(colorHex)
+  return result ? {
+    red: parseInt(result[1], 16),
+    green: parseInt(result[2], 16),
+    blue: parseInt(result[3], 16)
+  } : null
+}
+
+
+export function getContrast(color: string | { red: number, green: number, blue: number }): string | ColorRGB {
+  const isHex = typeof color === 'string'
+  const rgb: ColorRGB = (isHex ? hexToRgb(color as string) : color) as ColorRGB
+  const brightness = (rgb.red * 299) + (rgb.green * 587) + (rgb.blue * 114)
+
+  if (brightness / 255000 >= 0.5) {
+    return isHex ? '#000000' : {red: 0, green: 0, blue: 0}
+  } else {
+    return isHex ? '#ffffff' : {red: 255, green: 255, blue: 255}
+  }
 }
 
 const checkMinMax = ({min, max}) => {

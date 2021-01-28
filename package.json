@@ -1,6 +1,6 @@
 {
   "name": "@davidcmeier/string-to-color",
-  "version": "1.0.3",
+  "version": "2.0.0",
   "description": "Transform any string to a color!",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
